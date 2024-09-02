@@ -10,8 +10,10 @@ CUDA_SUPPORTED=(11.8 12.1)
 # Recover the project's directory from the position of the install.sh
 # script and move there. Not doing so would install some dependencies in
 # the wrong place
-HERE=`dirname $0`
-HERE=`realpath $HERE`
+
+# HERE=`dirname $0`
+# HERE=`realpath $HERE`
+HERE=`pwd`
 cd $HERE
 
 
@@ -46,7 +48,8 @@ echo
 # Recover the path to conda on your machine
 # First search the default '~/miniconda3' and '~/anaconda3' paths. If
 # those do not exist, ask for user input
-CONDA_DIR=`realpath ~/miniconda3`
+# CONDA_DIR=`realpath ~/miniconda3`
+CONDA_DIR=`/opt/conda`
 if (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
 then
   CONDA_DIR=`realpath ~/anaconda3`
@@ -103,6 +106,7 @@ pip install wandb
 pip install open3d
 pip install gdown
 pip install ipyfilechooser
+pip install laspy
 
 echo
 echo
