@@ -49,18 +49,18 @@ echo
 # First search the default '~/miniconda3' and '~/anaconda3' paths. If
 # those do not exist, ask for user input
 # CONDA_DIR=`realpath ~/miniconda3`
-CONDA_DIR=`/opt/conda`
-if (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
-then
-  CONDA_DIR=`realpath ~/anaconda3`
-fi
+CONDA_DIR='/opt/conda'
+# if (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
+# then
+#   CONDA_DIR=`realpath ~/anaconda3`
+# fi
 
-while (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
-do
-    echo "Could not find conda at: "$CONDA_DIR
-    read -p "Please provide your conda install directory: " CONDA_DIR
-    CONDA_DIR=`realpath $CONDA_DIR`
-done
+# while (test -z $CONDA_DIR) || [ ! -d $CONDA_DIR ]
+# do
+#     echo "Could not find conda at: "$CONDA_DIR
+#     read -p "Please provide your conda install directory: " CONDA_DIR
+#     CONDA_DIR=`realpath $CONDA_DIR`
+# done
 
 echo "Using conda conda found at: ${CONDA_DIR}/etc/profile.d/conda.sh"
 source ${CONDA_DIR}/etc/profile.d/conda.sh
