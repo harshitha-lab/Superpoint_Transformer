@@ -132,7 +132,7 @@ echo
 # https://github.com/drprojects/superpoint_transformer/issues/102
 # This is a linux-only fix:
 # https://stackoverflow.com/a/68845839
-conda install -c conda-forge libstdcxx-ng
+conda install -c conda-forge libstdcxx-ng -y
 pip install git+https://github.com/drprojects/point_geometric_features.git
 
 echo
