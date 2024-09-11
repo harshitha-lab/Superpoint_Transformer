@@ -158,8 +158,10 @@ class BaseDataset(InMemoryDataset):
             save_fp_dtype=torch.half,
             xy_tiling=None,
             pc_tiling=None,
-            val_mixed_in_train=False,
+            # val_mixed_in_train=False,
+            val_mixed_in_train=True,
             test_mixed_in_val=False,
+            # test_mixed_in_val=True,
             custom_hash=None,
             in_memory=False,
             point_save_keys=None,
@@ -597,8 +599,9 @@ class BaseDataset(InMemoryDataset):
         return path
 
     def download(self):
-        self.download_warning()
-        self.download_dataset()
+        # self.download_warning()
+        # self.download_dataset()
+        pass
 
     def download_dataset(self):
         """Download the dataset data. Modify this method to implement
