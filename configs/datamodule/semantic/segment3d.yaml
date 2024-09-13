@@ -19,6 +19,8 @@ partition_hf:
   - 'linearity'
   - 'planarity'
   - 'scattering'
+  - 'curvature'
+  - 'elevation'
 
 # point features used for training
 point_hf:
@@ -26,6 +28,8 @@ point_hf:
   - 'planarity'
   - 'scattering'
   - 'verticality'
+  - 'curvature'
+  - 'elevation'
 
 # segment-wise features computed at preprocessing
 segment_base_hf: []

@@ -108,6 +108,25 @@ pip install gdown
 pip install ipyfilechooser
 pip install laspy
 pip install mlflow
+pip install azureml-core==1.56.0
+pip install azureml-dataset-runtime==1.56.0
+pip install azureml-defaults==1.56.0.post1
+pip install azure-ml==0.0.1
+pip install azure-ml-component==0.9.18.post2
+pip install azureml-mlflow==1.56.0
+pip install azureml-contrib-services==1.56.0
+pip install azureml-contrib-services==1.56.0
+pip install azureml-automl-common-tools==1.56.0
+pip install torch-tb-profiler~=0.4.0
+pip install azureml-inference-server-http
+pip install inference-schema
+pip install MarkupSafe==2.1.2
+pip install regex
+pip install pybind11
+pip install urllib3>=1.26.18
+pip install cryptography>=42.0.5
+pip install aiohttp>=3.8.5
+pip install idna>=3.7
 
 
 
