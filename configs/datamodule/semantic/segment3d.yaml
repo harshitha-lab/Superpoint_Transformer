@@ -6,11 +6,11 @@ _target_: src.datamodules.segment3d.SEGMENT3DDataModule
 
 # These parameters are not actually used by the DataModule, but are used
 # here to facilitate model parameterization with config interpolation
-num_classes: 8
+num_classes: 9
 stuff_classes: [0, 1]
-trainval: True
-val_on_test: True
-xy_tiling: 3
+trainval: False
+val_on_test: False
+xy_tiling: null
 
 # Features that will be computed, saved, loaded for points and segments
 

@@ -7,7 +7,7 @@ defaults:
   - datamodule: semantic/s3dis.yaml
   - model: semantic/spt-2.yaml
   - callbacks: default.yaml
-  - logger: wandb.yaml # null for default, set logger here or use command line (e.g. `python train.py logger=tensorboard`)
+  - logger: many_loggers.yaml # null for default, set logger here or use command line (e.g. `python train.py logger=tensorboard`)
   - trainer: default.yaml
   - paths: default.yaml
   - extras: default.yaml

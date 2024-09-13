@@ -107,6 +107,9 @@ pip install open3d
 pip install gdown
 pip install ipyfilechooser
 pip install laspy
+pip install mlflow
+
+
 
 echo
 echo

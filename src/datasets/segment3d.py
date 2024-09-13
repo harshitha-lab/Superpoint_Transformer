@@ -31,7 +31,7 @@ def read_las_tile(
         filepath, 
         xyz=True, 
         rgb=True, 
-        intensity=True, 
+        intensity=False, 
         semantic=True, 
         instance=False,
         remap=False, 
@@ -147,7 +147,7 @@ class SEGMENT3D(BaseDataset):
     def __init__(self, *args, fold=5, with_stuff=False, **kwargs):
         self.fold = fold
         self.with_stuff = with_stuff
-        super().__init__(*args, val_mixed_in_train=True, **kwargs)
+        super().__init__(*args, val_mixed_in_train=False, **kwargs)
 
     @property
     def pre_transform_hash(self):
@@ -217,7 +217,7 @@ class SEGMENT3D(BaseDataset):
         """
         return    {
             'train': ['DrumPlant_Tank_rotate45_classified8.las'],
-            'val': [],
+            'val': ['DrumPlant_Tank_rotate45_classified_sample1.las', 'DrumPlant_Tank_rotate45_classified_sample2.las'],
             'test':  ['DrumPlant_Tank_rotate45_classified4.las'] 
             }
     
@@ -279,7 +279,6 @@ class SEGMENT3D(BaseDataset):
 
         # filepaths = glob.glob(os.path.join(folder_path, '*.las'))
         # filepath = filepaths[0] if isinstance(filepaths, list) and filepaths else filepaths 
-        filepath='/mnt/azureml/cr/j/76945fe7f3c54cdfa6fd793b7640f661/exe/wd/InputData/INPUT_pointcloudData/raw/DrumPlant_Tank_rotate45_classified8.las'
         return read_las_tile(raw_cloud_path[:-4])
     
     
