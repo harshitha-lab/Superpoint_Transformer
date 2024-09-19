@@ -20,7 +20,7 @@ partition_hf:
   - 'linearity'
   - 'planarity'
   - 'scattering'
-  # - 'curvature'
+  - 'verticality'
   - 'elevation'
 
 # point features used for training
@@ -29,7 +29,7 @@ point_hf:
   - 'linearity'
   - 'planarity'
   - 'scattering'
-  # - 'verticality'
+  - 'verticality'
   # - 'curvature'
   - 'elevation'
 
@@ -63,50 +63,53 @@ v_edge_hf: []  # vertical edge features used for training
 
 # Parameters declared here to facilitate tuning configs without copying
 # all the pre_transforms
-voxel: 0.01
-knn: 25
-knn_r: 10
+voxel: 0.03
+knn: 45
+knn_r: 2
 knn_step: -1
-knn_min_search: 10
-ground_threshold: 5
-ground_scale: 20
-pcp_regularization: [0.1, 0.2, 0.3]
-pcp_spatial_weight: [1e-1, 1e-2, 1e-3]
-pcp_cutoff: [10, 30, 100]
+knn_min_search: 25
+ground_threshold: 1.5
+ground_scale: 4.0
+pcp_regularization: [0.01, 0.1, 0.5]
+pcp_spatial_weight: [1e-1, 1e-1, 1e-1]
+pcp_cutoff: [10, 10, 10]
 pcp_k_adjacency: 10
 pcp_w_adjacency: 1
 pcp_iterations: 15
 graph_k_min: 1
 graph_k_max: 30
-graph_gap: [5, 30, 30]
+graph_gap: [0.2, 0.5, 1]
 graph_se_ratio: 0.3
 graph_se_min: 20
 graph_cycles: 3
-graph_margin: 0.5
+graph_margin: 0.2
 graph_chunk: [1e6, 1e5, 1e5]  # reduce if CUDA memory errors
 
 # Batch construction parameterization
-sample_segment_ratio: 0.2
+sample_segment_ratio: 0.1
 sample_segment_by_size: True
 sample_segment_by_class: False
 sample_point_min: 32
 sample_point_max: 128
-sample_graph_r: 50  # set to r<=0 to skip SampleRadiusSubgraphs
+sample_graph_r: 7  # set to r<=0 to skip SampleRadiusSubgraphs
 sample_graph_k: 4
 sample_graph_disjoint: True
 sample_edge_n_min: -1  # [5, 5, 15]
 sample_edge_n_max: -1  # [10, 15, 25]
 
 # Augmentations parameterization
-pos_jitter: 0.05
+pos_jitter: 0.03
 tilt_n_rotate_phi: 0.1
 tilt_n_rotate_theta: 180
 anisotropic_scaling: 0.2
-node_feat_jitter: 0
-h_edge_feat_jitter: 0
+rgb_jitter: 0
+rgb_autocontrast: 0.5
+rgb_drop: 0.3
+node_feat_jitter: 0.01
+h_edge_feat_jitter: 0.01
 v_edge_feat_jitter: 0
-node_feat_drop: 0
-h_edge_feat_drop: 0.3
+node_feat_drop: 0.3
+h_edge_feat_drop: 0
 v_edge_feat_drop: 0
 node_row_drop: 0
 h_edge_row_drop: 0
@@ -297,16 +300,17 @@ on_device_train_transform:
         level: '1+'
         num_edges: ${datamodule.max_num_edges}
 
-    # Move all point and segment features to 'x'
+    # Move all point and segment features to 'x', except for "rgb", on
+    # which we want to apply specific transforms
     - transform: NAGAddKeysTo
       params:
         level: 0
-        keys: ${eval:'ListConfig(${datamodule.point_hf})'}
+        keys: ${eval:'ListConfig([k for k in ${datamodule.point_hf} if k != "rgb"])'}
         to: 'x'
     - transform: NAGAddKeysTo
       params:
         level: '1+'
-        keys: ${eval:'ListConfig(${datamodule.segment_hf})'}
+        keys: ${eval:'ListConfig([k for k in ${datamodule.segment_hf} if k != "rgb"])'}
         to: 'x'
 
     # Add some noise and randomly some point, node and edge features
@@ -359,6 +363,31 @@ on_device_train_transform:
         key: 'v_edge_attr'
         to_mean: ${datamodule.drop_to_mean}
 
+    # RGB-specific transforms. In particular, the color dropout will
+    # switch off all three color channels together, instead of just one
+    # by one with
+#    - transform: NAGColorNormalize
+#      params:
+#        level: 'all'
+    - transform: NAGJitterKey
+      params:
+        key: 'rgb'
+        sigma: ${datamodule.rgb_jitter}
+        trunc: ${eval:'2 * ${datamodule.rgb_jitter}'}
+    - transform: NAGColorAutoContrast
+      params:
+        p: ${datamodule.rgb_autocontrast}
+    - transform: NAGColorDrop
+      params:
+        p: ${datamodule.rgb_drop}
+
+    # Finally move RGB to node and segment features, if need be
+    - transform: NAGAddKeysTo
+      params:
+        keys: 'rgb'
+        to: 'x'
+        strict: False
+
     # Add self-loops in the horizontal graph
     - transform: NAGAddSelfLoops
 
@@ -396,17 +425,32 @@ on_device_val_transform:
         keys: ${datamodule.v_edge_hf}
         use_mean_normal: ${eval:'"normal" in ${datamodule.segment_mean_hf}'}
 
-    # Move all point and segment features to 'x'
+    # Move all point and segment features to 'x', except for "rgb", on
+    # which we want to apply specific transforms
     - transform: NAGAddKeysTo
       params:
         level: 0
-        keys: ${eval:'ListConfig(${datamodule.point_hf})'}
+        keys: ${eval:'ListConfig([k for k in ${datamodule.point_hf} if k != "rgb"])'}
         to: 'x'
     - transform: NAGAddKeysTo
       params:
         level: '1+'
-        keys: ${eval:'ListConfig(${datamodule.segment_hf})'}
+        keys: ${eval:'ListConfig([k for k in ${datamodule.segment_hf} if k != "rgb"])'}
         to: 'x'
+
+    # RGB-specific transforms. In particular, the color dropout will
+    # switch off all three color channels together, instead of just one
+    # by one with
+#    - transform: NAGColorNormalize
+#      params:
+#        level: 'all'
+
+    # Finally move RGB to node and segment features, if need be
+    - transform: NAGAddKeysTo
+      params:
+        keys: 'rgb'
+        to: 'x'
+        strict: False
 
     # Add self-loops in the horizontal graph
     - transform: NAGAddSelfLoops
