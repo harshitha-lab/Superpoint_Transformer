@@ -339,19 +339,19 @@ ROOMS = {
 
 # Credit: https://github.com/torch-points3d/torch-points3d
 
-SEGMENT3D_NUM_CLASSES = 9
+SEGMENT3D_NUM_CLASSES = 4
 
 INV_OBJECT_LABEL = {
     0: "base",
     1: "pump",
     2: "tank",
-    3: "valve",
+    3: "valve"
     
-    4: "pipe",
-    5: "elbow",
-    6: "column",
-    7: "beam",
-    8: "angled beam"
+    # 4: "pipe",
+    # 5: "elbow",
+    # 6: "column",
+    # 7: "beam",
+    # 8: "angled beam"
 
     
     }
@@ -362,12 +362,14 @@ CLASS_COLORS = np.asarray([
     [0, 0, 0],        # 'unlabelled' -> black
     [233, 229, 107],  
     [95, 156, 196],   
-    [179, 116, 81],   
-    [241, 149, 131],  
-    [81, 163, 148],   
-    [77, 174, 84],    
-    [108, 135, 75],   
-    [41, 49, 101]
+    [179, 116, 81] 
+
+
+    # [241, 149, 131],  
+    # [81, 163, 148],   
+    # [77, 174, 84],    
+    # [108, 135, 75],   
+    # [41, 49, 101]
     
     ])      
 
