@@ -50,7 +50,7 @@ from src import utils
 
 import mlflow
 
-mlflow.autolog()
+#mlflow.autolog()
 
 # Registering the "eval" resolver allows for advanced config
 # interpolation with arithmetic operations:
