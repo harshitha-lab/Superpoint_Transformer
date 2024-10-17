@@ -216,9 +216,9 @@ class SEGMENT3D(BaseDataset):
             `{'train': [...], 'val': [...], 'test': [...]}`
         """
         return    {
-            'train': ['DrumPlant_Tank_rotate45_classified4.las',"DrumPlant_Tank_rotate45_classified8.las","DrumPlant_Tank_rotate45_classified.las"],
+            'train': ['DrumPlant_Tank_rotate45_classified8.las','DrumPlantC3_classified_N.las', 'DrumPlantC2_classified_N.las'],
             'val': ['DrumPlant_Tank_rotate45_classified_sample2.las', 'DrumPlant_Tank_rotate45_classified_sample1.las'],
-            'test':  ['DrumPlant_Tank_rotate45_classified_small.las'] 
+            'test':  ['DrumPlant_Tank_rotate45_classified_small.las', 'DrumPlantC1_classified_N.las']
             }
         # return    {
         #     'train': ['DrumPlant_Tank_rotate45_classified8.las'],

@@ -339,38 +339,34 @@ ROOMS = {
 
 # Credit: https://github.com/torch-points3d/torch-points3d
 
-SEGMENT3D_NUM_CLASSES = 4
-
+SEGMENT3D_NUM_CLASSES = 7
+ 
 INV_OBJECT_LABEL = {
-    0: "base",
-    1: "pump",
-    2: "tank",
-    3: "valve"
-    
-    # 4: "pipe",
-    # 5: "elbow",
-    # 6: "column",
+    0: "Base",
+    1: "Pump",
+    2: "Tank",
+    3: "Valve",
+    4: "SteelColumn",
+    5: "SteelPipe",
+    6: "SteelElbow"
     # 7: "beam",
     # 8: "angled beam"
-
+ 
     
     }
-
+ 
 CLASS_NAMES = [INV_OBJECT_LABEL[i] for i in range(SEGMENT3D_NUM_CLASSES)] + ['ignored']
-
+ 
 CLASS_COLORS = np.asarray([
     [0, 0, 0],        # 'unlabelled' -> black
     [233, 229, 107],  
     [95, 156, 196],   
-    [179, 116, 81] 
-
-
-    # [241, 149, 131],  
-    # [81, 163, 148],   
-    # [77, 174, 84],    
+    [179, 116, 81],
+    [241, 149, 131],  
+    [81, 163, 148],   
+    [77, 174, 84]  
     # [108, 135, 75],   
     # [41, 49, 101]
-    
     ])      
 
 OBJECT_LABEL = {name: i for i, name in INV_OBJECT_LABEL.items()}
