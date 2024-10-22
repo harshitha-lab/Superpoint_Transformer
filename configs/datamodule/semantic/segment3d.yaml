@@ -64,7 +64,7 @@ v_edge_hf: []  # vertical edge features used for training
 
 # Parameters declared here to facilitate tuning configs without copying
 # all the pre_transforms
-voxel: 0.01
+voxel: 0.02
 knn: 25
 knn_r: 10
 knn_step: -1
