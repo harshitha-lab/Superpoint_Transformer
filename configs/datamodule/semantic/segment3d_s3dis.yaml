@@ -6,32 +6,32 @@ _target_: src.datamodules.segment3d.SEGMENT3DDataModule
 
 # These parameters are not actually used by the DataModule, but are used
 # here to facilitate model parameterization with config interpolation
-num_classes: 9
+num_classes: 7
 stuff_classes: [0, 1]
 trainval: False
 val_on_test: False
-xy_tiling: null
+xy_tiling: 3
 
 # Features that will be computed, saved, loaded for points and segments
 
 # point features used for the partition
 partition_hf:
   # - 'rgb'
-  - 'linearity'
-  - 'planarity'
-  - 'scattering'
+  #- 'linearity'
+  #- 'planarity'
+  #- 'scattering'
   - 'verticality'
-  - 'elevation'
+  #- 'elevation'
 
 # point features used for training
 point_hf:
   # - 'rgb'
-  - 'linearity'
-  - 'planarity'
-  - 'scattering'
+  #- 'linearity'
+  #- 'planarity'
+  #- 'scattering'
   - 'verticality'
   # - 'curvature'
-  - 'elevation'
+  #- 'elevation'
 
 # segment-wise features computed at preprocessing
 segment_base_hf: []
@@ -63,7 +63,7 @@ v_edge_hf: []  # vertical edge features used for training
 
 # Parameters declared here to facilitate tuning configs without copying
 # all the pre_transforms
-voxel: 0.05
+voxel: 0.02
 knn: 25
 knn_r: 0.2
 knn_step: -1
