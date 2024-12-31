@@ -216,7 +216,7 @@ class SEGMENT3D(BaseDataset):
             `{'train': [...], 'val': [...], 'test': [...]}`
         """
         return    {
-            'train': ['esterhazy_k1_NewP2_2_33_classified2_1.las','esterhazy_k1_NewP2_2_33_classified2_3_21.las'],
+            'train': ['esterhazy_k1_NewP2_2_33_classified2_1.las','esterhazy_k1_NewP2_2_33_classified2_3_21.las','esterhazy_k1_NewP2_2_33_classified2_3_22.las'],
             'val': ['esterhazy_k1_NewP2_2_33_classified2_2.las'],
             'test':  ['esterhazy_k1_NewP2_2_33_classified2_3_1.las']
             }
