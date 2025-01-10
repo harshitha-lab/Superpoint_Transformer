@@ -343,10 +343,10 @@ SEGMENT3D_NUM_CLASSES = 5
  
 INV_OBJECT_LABEL = {
     0: "Base",
-    1: "Beam",
-    2: "Column",
+    1: "Column",
+    2: "Pipe",
     3: "Elbow",
-    4: "Pipe"
+    4: "Beam"
     # 7: "beam",
     # 8: "angled beam"
  
