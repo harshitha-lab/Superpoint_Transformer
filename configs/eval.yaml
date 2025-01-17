@@ -2,7 +2,7 @@
 
 defaults:
   - _self_
-  - datamodule: semantic/s3dis.yaml
+  - datamodule: semantic/segment3d.yaml
   - model: semantic/spt-2.yaml
   - logger: null
   - trainer: default.yaml
