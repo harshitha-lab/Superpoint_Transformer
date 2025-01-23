@@ -87,7 +87,7 @@ graph_margin: 0.5
 graph_chunk: [1e6, 1e5, 1e5]  # reduce if CUDA memory errors
 
 # Batch construction parameterization
-sample_segment_ratio: 0.2
+sample_segment_ratio: 0
 sample_segment_by_size: True
 sample_segment_by_class: False
 sample_point_min: 32
@@ -100,8 +100,8 @@ sample_edge_n_max: -1  # [10, 15, 25]
 
 # Augmentations parameterization
 pos_jitter: 0.05
-tilt_n_rotate_phi: 0.1
-tilt_n_rotate_theta: 180
+tilt_n_rotate_phi: 0
+tilt_n_rotate_theta: 0
 anisotropic_scaling: 0.2
 node_feat_jitter: 0
 h_edge_feat_jitter: 0
